@@ -23,7 +23,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.neo4j.graphdb.DependencyResolver;
-import org.neo4j.internal.collector.DataCollectorModule;
 import org.neo4j.io.IOUtils;
 import org.neo4j.kernel.NeoStoreDataSource;
 import org.neo4j.kernel.impl.core.EmbeddedProxySPI;
@@ -61,11 +60,6 @@ public class DataCollectorManager extends LifecycleAdapter
         NeoStoreDataSource dataSource = dataSourceManager.getDataSource();
         EmbeddedProxySPI embeddedProxySPI = dataSource.getDependencyResolver()
                 .resolveDependency( EmbeddedProxySPI.class, DependencyResolver.SelectionStrategy.ONLY );
-        dataCollectors.add( DataCollectorModule.setupDataCollector( procedures,
-                                                                    jobScheduler,
-                                                                    dataSource.getKernel(),
-                                                                    monitors,
-                                                                    new DefaultValueMapper( embeddedProxySPI ) ) );
     }
 
     @Override
